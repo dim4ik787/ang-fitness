@@ -1,22 +1,28 @@
 <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <ng-content select="h1"></ng-content>
+  <div class="text-center">
+    <ng-content select="h1"></ng-content>
+  </div>
 
-  <label class="mt-2">
-    <input type="email" placeholder="Email address" formControlName="email" />
-  </label>
-  <label class="mt-2">
-    <input type="password" placeholder="Enter password" formControlName="password" />
-  </label>
+  <input
+    class="mt-2 block w-full"
+    type="email"
+    placeholder="Email address"
+    formControlName="email" />
+  <input
+    class="mt-2 block w-full"
+    type="password"
+    placeholder="Enter password"
+    formControlName="password" />
 
   <div class="error mt-2" *ngIf="emailFormat">Invalid email format</div>
   <div class="error mt-2" *ngIf="passwordInvalid">Password is required</div>
 
   <ng-content select=".error"></ng-content>
 
-  <div class="mt-4">
+  <div class="mt-4 text-center">
     <ng-content select="button"></ng-content>
   </div>
-  <div class="mt-2">
+  <div class="-mx-10 -mb-5 pt-3 mt-5 text-center border-t-2 border-indigo-500">
     <ng-content select="a"></ng-content>
   </div>
 </form>
