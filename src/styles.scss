@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  button {
+    @apply py-1 px-3 border-2 rounded-full border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-800 outline-offset-1
+  }
+
+  input {
+    @apply h-8 rounded-xl bg-opacity-10 p-4 hover:border-indigo-800 border-[1px]
+  }
+
+  a {
+    @apply hover:underline decoration-indigo-800 underline-offset-2
+  }
+
+  .button-primary {
+    @apply px-4 py-2 bg-indigo-600 text-white rounded w-full hover:bg-indigo-800
+  }
+
+  .error {
+    @apply text-red-400
+  }
+}

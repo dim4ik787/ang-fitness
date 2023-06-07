@@ -1,2 +1,5 @@
-<p>login works!</p>
-<app-auth-form></app-auth-form>
+<app-auth-form (submitted)="loginUser($event)">
+  <h1 class="text-4xl">Login</h1>
+  <a routerLink="/auth/register">Not registered?</a>
+  <button type="submit">Login</button>
+</app-auth-form>

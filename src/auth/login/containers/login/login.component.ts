@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,4 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {}
+export class LoginComponent {
+  // constructor() {};
+  loginUser(event: FormGroup) {
+    console.log(event.value);
+  }
+}
