@@ -39,7 +39,8 @@
             "ignoreUrls": true,
             "code": 100
           }
-        ]
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off"
       }
     },
     {
