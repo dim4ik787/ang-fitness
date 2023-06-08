@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/auth/shared/services/auth/auth.service';
+import { AuthService } from 'src/app/auth/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent {
     const { email, password } = event.value;
 
     try {
-      await this.authService.createUser(email, password);
+      await this.authService.loginUser(email, password);
       this.router.navigate(['/']);
     } catch (error: unknown) {
       this.errorMessage = (error as Error).message;

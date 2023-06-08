@@ -1,0 +1,29 @@
+<header class="bg-white p-5">
+  <div class="max-w-4xl relative m-auto">
+    <div class="flex flex-col items-center">
+      <img
+        class="w-24 h-24 inline-block"
+        src="../../../assets/images/logo.png"
+        alt="Health logo by Freepik" />
+      <span>Logo designed by Freepik</span>
+    </div>
+    <svg
+      *ngIf="user?.authenticated"
+      role="button"
+      aria-label="logout"
+      (click)="onClick()"
+      (keyup.enter)="onKeydown()"
+      tabindex="0"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="absolute -translate-y-1/2 top-1/2 right-0 w-10 h-10 text-gray-400 hover:text-gray-600 focus:text-gray-600 inline-block">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
+    </svg>
+  </div>
+</header>

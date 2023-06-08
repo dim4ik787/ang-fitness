@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-  button {
+  button, .button {
     @apply py-1 px-3 border-2 rounded-full border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-800 outline-offset-1
   }
 
@@ -11,7 +11,7 @@
     @apply h-8 rounded-xl bg-opacity-10 p-5 hover:border-indigo-800 border-[1px] drop-shadow-md
   }
 
-  a {
+  a, .link {
     @apply hover:underline decoration-indigo-800 underline-offset-2
   }
 
