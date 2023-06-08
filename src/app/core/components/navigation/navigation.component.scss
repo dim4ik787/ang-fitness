@@ -1,0 +1,8 @@
+.navigation-item {
+  &.active {
+    @apply no-underline border-b-lime-500
+  }
+
+  @apply min-w-[150px] py-3 border-b-4 border-transparent uppercase text-center text-white hover:no-underline hover:border-b-lime-500 focus:border-b-lime-500
+}
+
