@@ -12,8 +12,6 @@ import { HealthModule } from '../health/health.module';
 
 import { Store } from 'store';
 
-
-
 @NgModule({
   declarations: [AppComponent, HeaderComponent, NavigationComponent],
   imports: [BrowserModule, AuthModule, HealthModule, AppRoutingModule],
