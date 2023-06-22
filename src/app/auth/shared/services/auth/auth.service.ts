@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Store } from '../../../../../store';
+import { catchError, of } from 'rxjs';
 
 export interface User {
   email: string | null;
@@ -34,7 +35,7 @@ export class AuthService {
   get authState() {
     return this.angularFireAuth.authState;
   }
-  
+
   createUser(email: string, password: string) {
     return this.angularFireAuth.createUserWithEmailAndPassword(email, password);
   }

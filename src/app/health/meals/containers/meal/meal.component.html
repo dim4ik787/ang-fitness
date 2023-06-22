@@ -1,0 +1,9 @@
+<div class="drop-shadow-lg shadow-black border border-indigo-300">
+  <div class="relative flex items-center p-4 w-full border-b border-indigo-300">
+    <div class="flex items-center">
+      <img src="assets/images/meal.svg" class="w-12 h-12 p-1" alt="test" />
+      <h1 class="text-lg font-bold">Create meal</h1>
+    </div>
+  </div>
+  <app-meal-form (create)="addMeal($event)"></app-meal-form>
+</div>

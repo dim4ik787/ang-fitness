@@ -13,11 +13,7 @@ export interface State {
 }
 
 const state: State = {
-  user: {
-    email: '1',
-    uid: '1',
-    authenticated: true,
-  },
+  user: null,
   meals: null,
 };
 
