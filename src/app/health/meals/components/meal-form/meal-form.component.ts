@@ -3,8 +3,11 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  OnChanges,
   Output,
   QueryList,
+  SimpleChanges,
   ViewChildren,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -16,11 +19,23 @@ import { Meal } from 'src/app/health/shared/services/meals/meals.service';
   styleUrls: ['./meal-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MealFormComponent {
+export class MealFormComponent implements OnChanges {
   @ViewChildren('formRow') formRows: QueryList<ElementRef> | undefined;
+
+  @Input()
+  meal?: Meal;
 
   @Output()
   create = new EventEmitter<Meal>();
+
+  @Output()
+  update = new EventEmitter<Meal>();
+
+  @Output()
+  remove = new EventEmitter<Meal>();
+
+  toggled = false;
+  exists = false;
 
   form = this.formBuilder.group({
     name: ['', Validators.required],
@@ -37,10 +52,43 @@ export class MealFormComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
+  ngOnChanges(): void {
+    if (this.meal?.name) {
+      this.exists = true;
+      this.emptyIngredients();
+
+      this.form.patchValue(this.meal);
+
+      if (this.meal.ingredients) {
+        for (const item of this.meal.ingredients) {
+          this.ingredients.push(new FormControl(item));
+        }
+      }
+      this.setFocusOnInput();
+    }
+  }
+  emptyIngredients() {
+    while (this.ingredients.controls.length) {
+      this.ingredients.removeAt(0);
+    }
+  }
+
   createMeal(): void {
     if (this.form.valid) {
       this.create.emit(this.form.value as Meal);
     }
+  }
+
+  updateMeal() {
+    if (this.form.valid) {
+      const formMeal = this.form.value as Meal;
+      formMeal.$key = this.meal!.$key;
+      this.update.emit(formMeal);
+    }
+  }
+
+  removeMeal() {
+    this.remove.emit(this.meal);
   }
 
   addIngredient(): void {
@@ -60,6 +108,10 @@ export class MealFormComponent {
     } else {
       this.ingredients.controls[0].patchValue('');
     }
+  }
+
+  toggle() {
+    this.toggled = !this.toggled;
   }
 
   private findEmptyFoodInput(): HTMLElement | null {

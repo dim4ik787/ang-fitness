@@ -21,16 +21,16 @@
     </a>
   </div>
   <div
-    class="bg-white border-indigo-300 border-x border-b p-5"
+    class="bg-white border-indigo-300 border-x border-b divide-y divide-indigo-300"
     *ngIf="meals$ | async as meals; else loading">
-    <div *ngIf="!meals.length" class="flex justify-center items-center text-lg">
+    <div *ngIf="!meals.length" class="flex justify-center items-center text-lg min-h-[100px]">
       <img class="w-7 h-7 mr-2" src="assets/images/face.svg" alt="sad face" />
       No meals, add a new meal
     </div>
 
-    <div *ngFor="let meal of meals; let i = index">
-      <app-list-item [item]="meal"> </app-list-item>
-    </div>
+    <ng-template ngFor let-meal [ngForOf]="meals" let-i="index">
+      <app-list-item [item]="meal" (remove)="removeMeal($event)"></app-list-item>
+    </ng-template>
   </div>
 
   <ng-template #loading>

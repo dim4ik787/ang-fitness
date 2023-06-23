@@ -1,13 +1,14 @@
 <form [formGroup]="form" class="bg-white divide-y divide-indigo-300">
   <div class="p-5">
     <label class="block">
-      <h3>Meal name</h3>
+      <h3 [ngClass]="{ error: required }">
+        Meal name<span class="error" *ngIf="required"> is required</span>
+      </h3>
       <input
         class="min-w-full mt-3"
         type="text"
         placeholder="e.g. English breakfast"
         formControlName="name" />
-      <div class="error" *ngIf="required">Meal name is required</div>
     </label>
   </div>
 
@@ -52,7 +53,27 @@
   </div>
 
   <div class="p-5 flex justify-between">
-    <button type="button" (click)="createMeal()">Create meal</button>
-    <a class="button border-0" [routerLink]="['../']">Cancel</a>
+    <div>
+      <button *ngIf="!exists" type="button" (click)="createMeal()">Create meal</button>
+      <button *ngIf="exists" type="button" (click)="updateMeal()">Save</button>
+      <a class="button border-0 ml-3 p-2" [routerLink]="['../']">Cancel</a>
+    </div>
+    <div *ngIf="exists">
+      <ng-template [ngIf]="toggled">
+        <p class="inline-block mr-2">Delete item?</p>
+        <button
+          class="mr-2 border-red-600 text-red-600 hover:bg-red-800"
+          type="button"
+          (click)="removeMeal()">
+          Yes
+        </button>
+        <button type="button" class="mr-2 border-0" (click)="toggle()">No</button>
+      </ng-template>
+      <ng-template [ngIf]="!toggled">
+        <button class="border-0 text-red-500 hover:bg-red-500 hover:shadow-md" (click)="toggle()">
+          Delete
+        </button>
+      </ng-template>
+    </div>
   </div>
 </form>

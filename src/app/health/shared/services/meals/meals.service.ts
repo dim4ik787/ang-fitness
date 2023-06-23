@@ -37,7 +37,6 @@ export class MealsService {
 
   getMeal(key: string): Observable<Meal> {
     if (!key) return of({} as Meal);
-
     return this.store.select<Meal[]>('meals').pipe(
       filter(meals => !!meals),
       map(meals => meals.find(meal => meal.$key === key) || ({} as Meal))
@@ -51,10 +50,11 @@ export class MealsService {
     );
   }
 
-  updateMeal(key: string, meal: Meal) {
+  updateMeal(meal: Meal) {
+    const { $key, ...updateData } = meal;
     return this.authService.user.pipe(
       map(user => user?.uid),
-      switchMap(uid => this.angularFireDatabase.object(`meals/${uid}/${key}`).update(meal))
+      switchMap(uid => this.angularFireDatabase.object(`meals/${uid}/${$key}`).update(updateData))
     );
   }
 
