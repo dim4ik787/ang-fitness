@@ -7,10 +7,11 @@ import {
   OnChanges,
   Output,
   QueryList,
-  SimpleChanges,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { asyncScheduler } from 'rxjs/internal/scheduler/async';
 import { Meal } from 'src/app/health/shared/services/meals/meals.service';
 
 @Component({
@@ -21,6 +22,8 @@ import { Meal } from 'src/app/health/shared/services/meals/meals.service';
 })
 export class MealFormComponent implements OnChanges {
   @ViewChildren('formRow') formRows: QueryList<ElementRef> | undefined;
+  @ViewChild('delete') deleteButton: ElementRef | undefined;
+  @ViewChild('no') noButton: ElementRef | undefined;
 
   @Input()
   meal?: Meal;
@@ -112,6 +115,14 @@ export class MealFormComponent implements OnChanges {
 
   toggle() {
     this.toggled = !this.toggled;
+
+    asyncScheduler.schedule(_ => {
+      if (this.toggled) {
+        this.noButton?.nativeElement.focus();
+      } else {
+        this.deleteButton?.nativeElement.focus();
+      }
+    });
   }
 
   private findEmptyFoodInput(): HTMLElement | null {

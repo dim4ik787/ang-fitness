@@ -1,0 +1,10 @@
+<div
+  class="border bg-indigo-100 hover:bg-indigo-200 flex items-center mr-2 p-4 rounded-2xl cursor-pointer"
+  *ngFor="let selector of selectors"
+  [class.active]="selector === value"
+  (click)="setSelected(selector)"
+  (keydown.enter)="setSelected(selector)"
+  tabindex="0">
+  <img class="w-10 h-10" src="assets/images/{{ selector }}.svg" alt="{{ selector }}" />
+  <p class="ml-2 uppercase text-indigo-800">{{ selector }}</p>
+</div>

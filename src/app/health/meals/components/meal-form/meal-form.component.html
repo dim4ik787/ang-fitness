@@ -67,10 +67,14 @@
           (click)="removeMeal()">
           Yes
         </button>
-        <button type="button" class="mr-2 border-0" (click)="toggle()">No</button>
+        <button #no type="button" class="mr-2 border-0" (click)="toggle()">No</button>
       </ng-template>
       <ng-template [ngIf]="!toggled">
-        <button class="border-0 text-red-500 hover:bg-red-500 hover:shadow-md" (click)="toggle()">
+        <button
+          #delete
+          class="border-0 text-red-500 hover:bg-red-500 hover:shadow-md"
+          type="button"
+          (click)="toggle()">
           Delete
         </button>
       </ng-template>

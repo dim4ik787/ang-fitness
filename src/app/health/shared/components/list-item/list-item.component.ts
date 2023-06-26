@@ -6,11 +6,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   styleUrls: ['./list-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListItemComponent<T extends { $key: string; name: string; ingredients?: string[] }> {
+export class ListItemComponent {
   toggled = false;
 
-  @Input() item!: T;
-  @Output() remove = new EventEmitter<T>();
+  @Input() item!: any;
+  @Output() remove = new EventEmitter<any>();
 
   toggle() {
     this.toggled = !this.toggled;
@@ -20,7 +20,7 @@ export class ListItemComponent<T extends { $key: string; name: string; ingredien
     this.remove.emit(this.item);
   }
 
-  getRoute(item: T) {
-    return [`../meals`, item.$key];
+  getRoute(item: any) {
+    return [`../${'ingredients' in item ? 'meals' : 'workouts'}/`, item.$key];
   }
 }
