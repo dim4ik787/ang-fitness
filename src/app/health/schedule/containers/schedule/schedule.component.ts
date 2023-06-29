@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Meal, MealsService } from 'src/app/health/shared/services/meals/meals.service';
 import {
+  ISelectedData,
   ScheduleList,
   ScheduleService,
 } from 'src/app/health/shared/services/schedule/schedule.service';
@@ -15,7 +16,7 @@ import { Store } from 'store';
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
   date$!: Observable<Date>;
-  selected$!: Observable<any>;
+  selected$!: Observable<ISelectedData>;
   schedule$!: Observable<ScheduleList>;
   subscriptions!: Subscription[];
   list$!: Observable<Array<Meal | Workout>>;
@@ -31,7 +32,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.date$ = this.store.select<Date>('date');
-    this.selected$ = this.store.select<any>('selected');
+    this.selected$ = this.store.select<ISelectedData>('selected');
     this.schedule$ = this.store.select<ScheduleList>('schedule');
     this.list$ = this.store.select<Array<Meal | Workout>>('list');
 
@@ -39,6 +40,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       this.scheduleService.schedule$.subscribe(),
       this.scheduleService.selected$.subscribe(),
       this.scheduleService.list$.subscribe(),
+      this.scheduleService.items$.subscribe(),
       this.mealsService.meals$.subscribe(),
       this.workoutsService.workouts$.subscribe(),
     ];
@@ -48,9 +50,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.scheduleService.updateDate(date);
   }
 
-  changeSection(data: any) {
+  changeSection(data: ISelectedData) {
     this.open = true;
     this.scheduleService.selectSection(data);
+  }
+
+  assignItem(items: string[]): void {
+    this.scheduleService.updateItems(items);
+    this.closeAssign();
   }
 
   closeAssign() {

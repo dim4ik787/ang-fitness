@@ -2,7 +2,7 @@
   <div class="relative flex items-center p-4 w-full border-b border-indigo-300">
     <div class="flex items-center">
       <img src="assets/images/workout.svg" class="w-12 h-12 p-1" alt="test" />
-      <h1 *ngIf="workout$ | async as workout; else title" class="text-lg font-bold">
+      <h1 *ngIf="workout$ | async as workout; else title" class="text-lg font-bold dark:text-white">
         {{ workout.name ? 'Edit' : 'Create' }} workout
       </h1>
       <ng-template #title>Loading...</ng-template>
@@ -16,7 +16,9 @@
     (update)="updateWorkout($event)"
     (remove)="removeWorkout($event)"></app-workout-form>
   <ng-template #loading>
-    <div role="status" class="bg-white flex justify-center items-center text-lg min-h-[100px]">
+    <div
+      role="status"
+      class="bg-white dark:bg-black dark:text-white flex justify-center items-center text-lg min-h-[100px]">
       <svg
         aria-hidden="true"
         class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

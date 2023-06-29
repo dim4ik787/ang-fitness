@@ -11,6 +11,10 @@
     @apply h-8 rounded-xl bg-opacity-10 p-5 hover:border-indigo-800 border-[1px] drop-shadow-md
   }
 
+  .dark input {
+    @apply bg-indigo-900 border-indigo-800 hover:border-indigo-500 text-white placeholder-white
+  }
+
   a, .link {
     @apply hover:underline decoration-indigo-800 underline-offset-2
   }

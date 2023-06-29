@@ -1,18 +1,22 @@
-<div class="text-center bg-indigo-500 p-3">
+<div class="text-center bg-indigo-500 p-3 text-white">
   {{ name }}
 </div>
 
 <div>
   <div
     *ngIf="section.meals; else addMeal"
-    class="item"
+    class="item bg-meal-icon italic"
     tabindex="0"
-    (click)="onSelect('meals', section.meals)"
-    (keypress.enter)="onSelect('meals', section.meals)">
+    (click)="onSelect($event, 'meals', section.meals)"
+    (keydown.enter)="onSelect($event, 'meals', section.meals)">
     <span>{{ section.meals | join }}</span>
   </div>
   <ng-template #addMeal>
-    <div class="item" tabindex="0" (click)="onSelect('meals')" (keydown.enter)="onSelect('meals')">
+    <div
+      class="item bg-add-icon"
+      tabindex="0"
+      (click)="onSelect($event, 'meals')"
+      (keydown.enter)="onSelect($event, 'meals')">
       Assign meal
     </div>
   </ng-template>
@@ -21,18 +25,18 @@
 <div>
   <div
     *ngIf="section.workouts; else addWorkouts"
-    class="item"
+    class="item bg-workout-icon italic"
     tabindex="0"
-    (click)="onSelect('workouts', section.workouts)"
-    (keypress.enter)="onSelect('workouts', section.workouts)">
+    (click)="onSelect($event, 'workouts', section.workouts)"
+    (keydown.enter)="onSelect($event, 'workouts', section.workouts)">
     <span>{{ section.workouts | join }}</span>
   </div>
   <ng-template #addWorkouts>
     <div
-      class="item"
+      class="item bg-add-icon"
       tabindex="0"
-      (click)="onSelect('workouts')"
-      (keydown.enter)="onSelect('workouts')">
+      (click)="onSelect($event, 'workouts')"
+      (keydown.enter)="onSelect($event, 'workouts')">
       Assign workout
     </div>
   </ng-template>

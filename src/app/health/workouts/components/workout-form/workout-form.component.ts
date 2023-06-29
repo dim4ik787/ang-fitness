@@ -9,7 +9,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Workout } from 'src/app/health/shared/services/workouts/workouts.service';
 
 @Component({

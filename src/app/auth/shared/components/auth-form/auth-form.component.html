@@ -1,9 +1,10 @@
-<form class="auth-form m-auto" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="text-center">
     <ng-content select="h1"></ng-content>
   </div>
 
   <input
+    #emailInput
     class="mt-2 block w-full"
     type="email"
     placeholder="Email address"

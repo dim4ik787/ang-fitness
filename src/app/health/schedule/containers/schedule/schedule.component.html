@@ -8,4 +8,5 @@
   appTrapFocus
   [section]="selected$ | async"
   [list]="list$ | async"
+  (update)="assignItem($event)"
   (cancel)="closeAssign()"></app-schedule-assign>

@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Meal } from 'src/app/health/shared/services/meals/meals.service';
 import { ScheduleItem } from 'src/app/health/shared/services/schedule/schedule.service';
-import { Workout } from 'src/app/health/shared/services/workouts/workouts.service';
 
 export type SelectedSection = {
   type: string;
-  assigned: Array<Meal | Workout>;
+  assigned: Array<string>;
   data: ScheduleItem;
+  triggeredElement: HTMLElement;
 };
 
 @Component({
@@ -19,15 +18,17 @@ export class ScheduleSectionComponent {
   @Input() name!: string;
   @Input() section!: ScheduleItem;
 
-  @Output() selected = new EventEmitter<any>();
+  @Output() selected = new EventEmitter<SelectedSection>();
 
-  onSelect(type: string, assigned: Array<Meal | Workout> = []) {
+  onSelect(event: Event, type: string, assigned: Array<string> = []): void {
     const data = this.section;
+    const triggeredElement = event.target as HTMLElement;
 
     this.selected.emit({
       type,
       assigned,
       data,
+      triggeredElement,
     });
   }
 }

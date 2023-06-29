@@ -7,9 +7,12 @@ import {
   Output,
 } from '@angular/core';
 import {
+  ISelectedData,
   ScheduleItem,
   ScheduleList,
 } from 'src/app/health/shared/services/schedule/schedule.service';
+
+import { SelectedSection } from '../schedule-section/schedule-section.component';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -25,7 +28,7 @@ export class ScheduleCalendarComponent implements OnChanges {
   @Input() items: ScheduleList | null = null;
 
   @Output() dateChanged = new EventEmitter<Date>();
-  @Output() selected = new EventEmitter<unknown>();
+  @Output() selected = new EventEmitter<ISelectedData>();
 
   selectedDay!: Date;
   selectedDayIndex!: number;
@@ -67,21 +70,22 @@ export class ScheduleCalendarComponent implements OnChanges {
   }
 
   selectSection(
-    { type, assigned, data }: { type: string; assigned: string; data: Date },
+    { type, assigned, data, triggeredElement }: SelectedSection,
     section: string
-  ) {
+  ): void {
     const day = this.selectedDay;
 
     this.selected.emit({
       type,
       assigned,
       section,
+      triggeredElement,
       day,
       data,
     });
   }
 
-  private getStartOfWeek(date: Date) {
+  private getStartOfWeek(date: Date): Date {
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(date.setDate(diff));

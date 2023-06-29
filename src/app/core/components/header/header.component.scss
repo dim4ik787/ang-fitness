@@ -1,0 +1,7 @@
+.logout {
+  @apply absolute -translate-y-1/2 top-1/2 right-4 w-10 h-10 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:text-gray-600 dark:focus:text-gray-200 inline-block
+}
+
+.left {
+  @apply absolute -translate-y-1/2 top-1/2 left-4 w-10 h-10 inline-block;
+}

@@ -13,8 +13,21 @@ import { Store } from 'store';
 export class AppComponent implements OnInit, OnDestroy {
   user$!: Observable<User>;
   subscription!: Subscription;
+  isLightTheme: boolean;
 
-  constructor(private store: Store, private authService: AuthService, private router: Router) {}
+  constructor(private store: Store, private authService: AuthService, private router: Router) {
+    if (
+      localStorage.getItem('color-theme') === 'dark' ||
+      (!('color-theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+      this.isLightTheme = false;
+    } else {
+      document.documentElement.classList.remove('dark');
+      this.isLightTheme = true;
+    }
+  }
 
   ngOnInit(): void {
     this.subscription = this.authService.auth$.subscribe();

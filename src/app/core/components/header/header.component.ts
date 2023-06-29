@@ -8,11 +8,10 @@ import { User } from 'src/app/auth/shared/services/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  @Input()
-  user!: User | null;
+  @Input() user!: User | null;
+  @Input() isLightTheme!: boolean;
 
-  @Output()
-  logout = new EventEmitter<any>();
+  @Output() logout = new EventEmitter<void>();
 
   onClick(): void {
     this.logoutUser();

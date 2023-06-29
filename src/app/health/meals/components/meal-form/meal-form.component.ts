@@ -116,7 +116,7 @@ export class MealFormComponent implements OnChanges {
   toggle() {
     this.toggled = !this.toggled;
 
-    asyncScheduler.schedule(_ => {
+    asyncScheduler.schedule(() => {
       if (this.toggled) {
         this.noButton?.nativeElement.focus();
       } else {

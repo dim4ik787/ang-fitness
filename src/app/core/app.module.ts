@@ -11,9 +11,10 @@ import { AuthModule } from 'src/app/auth/auth.module';
 import { HealthModule } from '../health/health.module';
 
 import { Store } from 'store';
+import { ThemeButtonComponent } from './components/theme-button/theme-button.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavigationComponent],
+  declarations: [AppComponent, HeaderComponent, NavigationComponent, ThemeButtonComponent],
   imports: [BrowserModule, AuthModule, HealthModule, AppRoutingModule],
   providers: [Store],
   bootstrap: [AppComponent],

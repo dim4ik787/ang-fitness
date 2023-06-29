@@ -6,6 +6,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         'add-icon': "url('src/assets/images/add.svg')",
+        'meal-icon': "url('src/assets/images/meal.svg')",
+        'workout-icon': "url('src/assets/images/workout.svg')",
       }
     },
   },

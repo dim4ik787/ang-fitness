@@ -1,8 +1,7 @@
 :host {
-  @apply border-x border-b bg-white border-indigo-300 block divide-y-2;
+  @apply border-x border-b bg-white border-indigo-300 block divide-y divide-indigo-300;
 }
 
 .item {
-  @apply cursor-pointer bg-add-icon bg-[_24px_24px] bg-no-repeat bg-[8px] px-9 py-4 hover:bg-slate-200;
+  @apply cursor-pointer bg-[_24px_24px] bg-no-repeat bg-[8px] px-10 py-4 hover:bg-slate-200 dark:bg-black dark:hover:bg-indigo-800 dark:text-white;
 }
-// bg-[url('src/assets/images/add.svg')]

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from 'store';
-import { Meal } from '../meals/meals.service';
-import { Workout } from '../workouts/workouts.service';
 import { AuthService } from 'src/app/auth/shared/services/auth/auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { SelectedSection } from 'src/app/health/schedule/components/schedule-section/schedule-section.component';
 
 export interface ScheduleItem {
-  meals: Meal[];
-  workouts: Workout[];
+  meals: string[] | null;
+  workouts: string[] | null;
   section: string;
   timestamp: number;
   $key?: string;
@@ -22,12 +21,50 @@ export interface ScheduleList {
   [key: string]: unknown;
 }
 
+export interface ISelectedData extends SelectedSection {
+  type: string;
+  assigned: Array<string>;
+  section: string;
+  triggeredElement: HTMLElement;
+  day: Date;
+  data: ScheduleItem;
+}
+
 @Injectable()
 export class ScheduleService {
   private date$ = new BehaviorSubject(new Date());
-  private section$ = new Subject();
+  private section$ = new Subject<ISelectedData>();
+  private itemList$ = new Subject();
 
-  selected$ = this.section$.pipe(tap(next => this.store.set('selected', next)));
+  items$ = this.itemList$.pipe(
+    withLatestFrom(this.section$),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    switchMap(([items, section]: any) => {
+      const sectionId = section.data.$key;
+
+      const defaults: ScheduleItem = {
+        workouts: null,
+        meals: null,
+        section: section.section,
+        timestamp: new Date(section.day).getTime(),
+      };
+
+      const payload = {
+        ...(sectionId ? section.data : defaults),
+        ...items,
+      };
+
+      if (sectionId) {
+        delete payload.$key;
+
+        return this.updateSection(sectionId, payload);
+      } else return this.createSection(payload);
+    })
+  );
+
+  selected$: Observable<ISelectedData> = this.section$.pipe(
+    tap(next => this.store.set('selected', next))
+  );
 
   schedule$: Observable<ScheduleList> = this.date$.pipe(
     tap((next: Date) => this.store.set('date', next)),
@@ -37,9 +74,10 @@ export class ScheduleService {
 
       return { startAt, endAt };
     }),
-    switchMap((date: any) => {
+    switchMap(date => {
       return this.getSchedule(date.startAt, date.endAt);
     }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     map((data: any) => {
       const mapped: ScheduleList = {};
 
@@ -55,7 +93,7 @@ export class ScheduleService {
   );
 
   list$ = this.section$.pipe(
-    map((value: any) => this.store.value[value.type]),
+    map((value: ISelectedData) => this.store.value[value.type]),
     tap(next => this.store.set('list', next))
   );
 
@@ -69,8 +107,12 @@ export class ScheduleService {
     this.date$.next(date);
   }
 
-  selectSection(section: any) {
+  selectSection(section: ISelectedData) {
     this.section$.next(section);
+  }
+
+  updateItems(items: string[]) {
+    this.itemList$.next(items);
   }
 
   private getSchedule(startAt: number, endAt: number) {
@@ -78,7 +120,7 @@ export class ScheduleService {
       map(user => user?.uid),
       switchMap(uid =>
         this.angularFireDatabase
-          .list(`schedule/${uid}`, ref =>
+          .list<object>(`schedule/${uid}`, ref =>
             ref.orderByChild('timestamp').startAt(startAt).endAt(endAt)
           )
           .snapshotChanges()
@@ -90,6 +132,20 @@ export class ScheduleService {
           return { ...(data as object), $key: key };
         });
       })
+    );
+  }
+
+  private updateSection(key: string, data: ScheduleItem) {
+    return this.authService.user.pipe(
+      map(user => user?.uid),
+      switchMap(uid => this.angularFireDatabase.object(`schedule/${uid}/${key}`).update(data))
+    );
+  }
+
+  private createSection(data: ScheduleItem) {
+    return this.authService.user.pipe(
+      map(user => user?.uid),
+      switchMap(uid => this.angularFireDatabase.list(`schedule/${uid}`).push(data))
     );
   }
 }

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,9 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.scss'],
 })
-export class AuthFormComponent {
-  @Output()
-  submitted = new EventEmitter<FormGroup>();
+export class AuthFormComponent implements AfterViewInit {
+  @Output() submitted = new EventEmitter<FormGroup>();
+  @ViewChild('emailInput') emailInput!: ElementRef;
 
   form = this.formBuilder.group({
     email: ['', Validators.email],
@@ -16,6 +23,10 @@ export class AuthFormComponent {
   });
 
   constructor(private formBuilder: FormBuilder) {}
+
+  ngAfterViewInit(): void {
+    this.emailInput.nativeElement.focus();
+  }
 
   onSubmit() {
     if (this.form.valid) {

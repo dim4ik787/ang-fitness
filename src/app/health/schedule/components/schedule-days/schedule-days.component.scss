@@ -1,5 +1,9 @@
 :host {
-  @apply bg-white w-full flex flex-col sm:flex-row sm:justify-around p-3 border-x border-b border-indigo-300;
+  @apply block;
+}
+
+.content {
+  @apply bg-white dark:bg-black w-full flex flex-col sm:flex-row sm:justify-around p-3 border-x border-b border-indigo-300;
 }
 
 .active {

@@ -7,7 +7,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { asyncScheduler } from 'rxjs';
 import { Meal } from 'src/app/health/shared/services/meals/meals.service';
+import { ISelectedData } from 'src/app/health/shared/services/schedule/schedule.service';
 import { Workout } from 'src/app/health/shared/services/workouts/workouts.service';
 
 @Component({
@@ -17,10 +19,10 @@ import { Workout } from 'src/app/health/shared/services/workouts/workouts.servic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleAssignComponent implements OnInit {
-  @Input() section: any;
+  @Input() section!: ISelectedData | null;
   @Input() list!: Array<Meal | Workout> | null;
 
-  @Output() update = new EventEmitter<any>();
+  @Output() update = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
   @HostListener('click', ['$event']) onClick(event: Event) {
@@ -36,13 +38,12 @@ export class ScheduleAssignComponent implements OnInit {
   private selected: string[] = [];
 
   ngOnInit(): void {
-    this.selected = [...this.section.assigned];
+    if (this.section) this.selected = [...this.section.assigned];
   }
 
   toggleItem(name: string): void {
     if (this.exists(name)) this.selected = this.selected.filter(item => item !== name);
     else this.selected = [...this.selected, name];
-    console.log(this.selected);
   }
 
   getRoute(name: string): string[] {
@@ -54,12 +55,16 @@ export class ScheduleAssignComponent implements OnInit {
   }
 
   updateAssign(): void {
-    this.update.emit({
-      [this.section.type]: this.selected,
-    });
+    if (this.section) {
+      asyncScheduler.schedule(() => this.section?.triggeredElement.focus());
+      this.update.emit({
+        [this.section.type]: this.selected,
+      });
+    }
   }
 
   cancelAssign(): void {
     this.cancel.emit();
+    this.section?.triggeredElement.focus();
   }
 }

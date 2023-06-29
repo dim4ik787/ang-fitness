@@ -1,11 +1,12 @@
-<header class="bg-white p-5">
+<header class="bg-white p-5 dark:bg-black">
   <div class="max-w-4xl relative m-auto">
+    <app-theme-button class="left" [isLightTheme]="isLightTheme"></app-theme-button>
     <div class="flex flex-col items-center">
       <img
         class="w-24 h-24 inline-block"
         src="../../../assets/images/logo.png"
         alt="Health logo by Freepik" />
-      <span>Logo designed by Freepik</span>
+      <span class="dark:text-white">Logo designed by Freepik</span>
     </div>
     <svg
       *ngIf="user?.authenticated"
@@ -19,7 +20,7 @@
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="absolute -translate-y-1/2 top-1/2 right-4 w-10 h-10 text-gray-400 hover:text-gray-600 focus:text-gray-600 inline-block">
+      class="logout">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"

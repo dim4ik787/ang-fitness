@@ -39,7 +39,7 @@ export class Store {
     return this.store.pipe(map((item: State) => item[name]));
   }
 
-  set(name: string, state: any) {
+  set(name: string, state: unknown) {
     this.subject.next({ ...this.value, [name]: state });
   }
 }
