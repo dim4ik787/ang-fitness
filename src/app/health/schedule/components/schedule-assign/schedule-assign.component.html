@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="flex justify-between items-center p-5 bg-slate-100 border-b border-indigo-300">
+    <img
+      class="w-10 h-10"
+      src="assets/images/{{ section.type === 'workouts' ? 'workout' : 'meal' }}.svg"
+      alt="{{ section.type }}" />
+    <h1>Assign {{ section.type }}</h1>
+    <a
+      [routerLink]="getRoute(section.type)"
+      class="button flex items-center py-2 px-4 uppercase text-sm">
+      <svg
+        class="w-4 h-4 mr-2"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-9h3a1 1 0 010 2h-3v3a1 1 0 01-2 0v-3H6a1 1 0 010-2h3V6a1 1 0 012 0v3z"
+          clip-rule="evenodd"></path>
+      </svg>
+      New {{ section.type }}
+    </a>
+  </div>
+  <div class="m-7 border min-h-[100px]" *ngIf="list">
+    <span *ngIf="!list.length">
+      <!-- <img src="face" alt=""> -->
+      Nothing here to assign
+    </span>
+    <div
+      *ngFor="let item of list"
+      class="toggle-item"
+      tabindex="0"
+      (keypress.enter)="toggleItem(item.name)"
+      [class.active]="exists(item.name)"
+      (click)="toggleItem(item.name)">
+      {{ item.name }}
+    </div>
+  </div>
+
+  <div class="p-5 border-t border-indigo-300">
+    <button type="button" (click)="updateAssign()">Update</button>
+    <button class="border-0 ml-1" type="button" (click)="cancelAssign()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="text-center bg-indigo-500 p-3">
+  {{ name }}
+</div>
+
+<div>
+  <div
+    *ngIf="section.meals; else addMeal"
+    class="item"
+    tabindex="0"
+    (click)="onSelect('meals', section.meals)"
+    (keypress.enter)="onSelect('meals', section.meals)">
+    <span>{{ section.meals | join }}</span>
+  </div>
+  <ng-template #addMeal>
+    <div class="item" tabindex="0" (click)="onSelect('meals')" (keydown.enter)="onSelect('meals')">
+      Assign meal
+    </div>
+  </ng-template>
+</div>
+
+<div>
+  <div
+    *ngIf="section.workouts; else addWorkouts"
+    class="item"
+    tabindex="0"
+    (click)="onSelect('workouts', section.workouts)"
+    (keypress.enter)="onSelect('workouts', section.workouts)">
+    <span>{{ section.workouts | join }}</span>
+  </div>
+  <ng-template #addWorkouts>
+    <div
+      class="item"
+      tabindex="0"
+      (click)="onSelect('workouts')"
+      (keydown.enter)="onSelect('workouts')">
+      Assign workout
+    </div>
+  </ng-template>
+</div>

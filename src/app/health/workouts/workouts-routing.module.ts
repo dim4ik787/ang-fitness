@@ -1,10 +1,8 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { WorkoutsComponent } from './containers/workouts/workouts.component';
 import { WorkoutComponent } from './containers/workout/workout.component';
-
 
 export const ROUTES: Routes = [
   {

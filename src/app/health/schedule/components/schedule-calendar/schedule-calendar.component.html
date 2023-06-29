@@ -1,0 +1,11 @@
+<app-schedule-controls
+  [selected]="selectedDay"
+  (moveDate)="changeDate($event)"></app-schedule-controls>
+<app-schedule-days
+  [selected]="selectedDayIndex"
+  (selectedDay)="changeDay($event)"></app-schedule-days>
+<app-schedule-section
+  *ngFor="let section of sections"
+  [name]="section.name"
+  [section]="getSection(section.key)"
+  (selected)="selectSection($event, section.key)"></app-schedule-section>

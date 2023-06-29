@@ -1,0 +1,11 @@
+<input #displayButtons class="hidden" type="checkbox" />
+<button
+  type="button"
+  class="transition-all border-0 hover:shadow-md hidden sm:inline-block"
+  [class.active]="i === selected"
+  *ngFor="let day of days; index as i"
+  (click)="selectDay(i)">
+  <span>
+    {{ day }}
+  </span>
+</button>

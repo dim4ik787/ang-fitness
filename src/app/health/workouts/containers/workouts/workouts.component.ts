@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { take } from 'rxjs/internal/operators/take';
 import { Workout, WorkoutsService } from 'src/app/health/shared/services/workouts/workouts.service';
 import { Store } from 'store';
 

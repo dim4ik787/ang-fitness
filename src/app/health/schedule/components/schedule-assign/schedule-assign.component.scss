@@ -1,0 +1,15 @@
+:host {
+  @apply fixed top-0 left-0 right-0 z-50 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full justify-center items-center flex bg-slate-800 bg-opacity-80;
+}
+
+.container {
+  @apply relative w-full max-w-sm max-h-full border bg-white;
+}
+
+.toggle-item {
+  @apply cursor-pointer bg-[url('src/assets/images/add.svg')] bg-no-repeat bg-[_20px_20px] bg-[4px] pl-7 py-1 transition-all;
+
+  &.active {
+    @apply bg-[url('src/assets/images/add-green.svg')];
+  }
+}

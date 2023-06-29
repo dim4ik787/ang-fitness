@@ -6,11 +6,15 @@ import { map } from 'rxjs/internal/operators/map';
 import { User } from './app/auth/shared/services/auth/auth.service';
 import { Meal } from './app/health/shared/services/meals/meals.service';
 import { Workout } from './app/health/shared/services/workouts/workouts.service';
+import { ScheduleItem } from './app/health/shared/services/schedule/schedule.service';
 
 export interface State {
   user: User | null;
   meals: Meal[] | null;
   workouts: Workout[] | null;
+  date: Date | null;
+  list: any;
+  schedule: ScheduleItem[] | null;
   [key: string]: any;
 }
 
@@ -18,6 +22,9 @@ const state: State = {
   user: null,
   meals: null,
   workouts: null,
+  date: null,
+  schedule: null,
+  list: null,
 };
 
 export class Store {

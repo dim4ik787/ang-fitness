@@ -1,0 +1,11 @@
+:host {
+  @apply bg-white w-full flex flex-col sm:flex-row sm:justify-around p-3 border-x border-b border-indigo-300;
+}
+
+.active {
+  @apply text-white bg-indigo-800 inline-block
+}
+
+input:checked ~ button {
+  @apply inline-block;
+}

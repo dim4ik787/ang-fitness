@@ -1,1 +1,11 @@
-<p>schedule works!</p>
+<app-schedule-calendar
+  [date]="date$ | async"
+  [items]="schedule$ | async"
+  (dateChanged)="changeDate($event)"
+  (selected)="changeSection($event)"></app-schedule-calendar>
+<app-schedule-assign
+  *ngIf="open"
+  appTrapFocus
+  [section]="selected$ | async"
+  [list]="list$ | async"
+  (cancel)="closeAssign()"></app-schedule-assign>

@@ -10,17 +10,19 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { RouterModule } from '@angular/router';
 import { JoinPipe } from './pipes/join.pipe';
 import { WorkoutPipe } from './pipes/workout.pipe';
+import { ScheduleService } from './services/schedule/schedule.service';
+import { TrapFocusDirective } from './directives/trap-focus.directive';
 
 @NgModule({
-  declarations: [ListItemComponent, JoinPipe, WorkoutPipe],
+  declarations: [ListItemComponent, JoinPipe, WorkoutPipe, TrapFocusDirective],
   imports: [CommonModule, RouterModule, AngularFireDatabaseModule],
-  exports: [ListItemComponent, JoinPipe, WorkoutPipe],
+  exports: [ListItemComponent, JoinPipe, WorkoutPipe, TrapFocusDirective],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [MealsService, WorkoutsService],
+      providers: [MealsService, WorkoutsService, ScheduleService],
     };
   }
 }

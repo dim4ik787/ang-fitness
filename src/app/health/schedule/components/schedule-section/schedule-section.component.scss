@@ -1,0 +1,8 @@
+:host {
+  @apply border-x border-b bg-white border-indigo-300 block divide-y-2;
+}
+
+.item {
+  @apply cursor-pointer bg-add-icon bg-[_24px_24px] bg-no-repeat bg-[8px] px-9 py-4 hover:bg-slate-200;
+}
+// bg-[url('src/assets/images/add.svg')]
