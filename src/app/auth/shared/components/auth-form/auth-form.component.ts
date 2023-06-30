@@ -22,6 +22,16 @@ export class AuthFormComponent implements AfterViewInit {
     password: ['', Validators.required],
   });
 
+  get passwordInvalid(): boolean {
+    const control = this.form.get('password')!;
+    return control.hasError('required') && control.touched;
+  }
+
+  get emailFormat(): boolean {
+    const control = this.form.get('email')!;
+    return control.hasError('email') && control.touched;
+  }
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngAfterViewInit(): void {
@@ -32,15 +42,5 @@ export class AuthFormComponent implements AfterViewInit {
     if (this.form.valid) {
       this.submitted.emit(this.form);
     }
-  }
-
-  get passwordInvalid(): boolean {
-    const control = this.form.get('password')!;
-    return control.hasError('required') && control.touched;
-  }
-
-  get emailFormat(): boolean {
-    const control = this.form.get('email')!;
-    return control.hasError('email') && control.touched;
   }
 }

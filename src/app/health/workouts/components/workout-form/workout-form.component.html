@@ -4,69 +4,93 @@
       <h3 [ngClass]="{ error: required }">
         Workout name<span class="error" *ngIf="required"> is required</span>
       </h3>
-      <input
-        class="min-w-full mt-3"
-        type="text"
-        [placeholder]="placeholder"
-        formControlName="name" />
+      <input class="w-full mt-3" type="text" [placeholder]="placeholder" formControlName="name" />
     </label>
   </div>
   <div class="mt-3 p-5">
     <h3>Type</h3>
     <app-workout-type formControlName="type"></app-workout-type>
   </div>
-
   <div
     *ngIf="form.get('type')?.value === 'strength'"
     formGroupName="strength"
-    class="flex gap-2 p-5">
+    class="flex gap-2 p-5 flex-col sm:flex-row">
     <label>
       <h3 class="">Reps</h3>
-      <input class="mt-3" type="number" formControlName="reps" />
+      <input
+        class="mt-3 w-full"
+        [min]="0"
+        [appMinimumValue]="0"
+        type="number"
+        formControlName="reps" />
     </label>
     <label>
       <h3 class="">Sets</h3>
-      <input class="mt-3" type="number" formControlName="sets" />
+      <input
+        class="mt-3 w-full"
+        [min]="0"
+        [appMinimumValue]="0"
+        type="number"
+        formControlName="sets" />
     </label>
     <label>
       <h3 class="">Weight <span>(kg)</span></h3>
-      <input class="mt-3" type="number" formControlName="weight" />
+      <input
+        class="mt-3 w-full"
+        [min]="0"
+        [appMinimumValue]="0"
+        type="number"
+        formControlName="weight" />
     </label>
   </div>
 
   <div
     *ngIf="form.get('type')?.value === 'endurance'"
     formGroupName="endurance"
-    class="flex gap-2 p-5">
+    class="flex gap-2 p-5 flex-col sm:flex-row">
     <label>
       <h3 class="">Distance <span>(km)</span></h3>
-      <input class="mt-3" type="number" formControlName="distance" />
+      <input
+        class="mt-3 w-full"
+        [min]="0"
+        [appMinimumValue]="0"
+        type="number"
+        formControlName="distance" />
     </label>
     <label>
       <h3 class="">Duration <span>(min)</span></h3>
-      <input class="mt-3" type="number" formControlName="duration" />
+      <input
+        class="mt-3 w-full"
+        [min]="0"
+        [appMinimumValue]="0"
+        type="number"
+        formControlName="duration" />
     </label>
   </div>
 
-  <div class="p-5 flex justify-between">
+  <div class="p-5 flex flex-col sm:flex-row justify-between">
     <div>
-      <button *ngIf="!exists" type="button" (click)="createWorkout()">Create workout</button>
+      <button *ngIf="!exists" type="button" (click)="createWorkout()">Create meal</button>
       <button *ngIf="exists" type="button" (click)="updateWorkout()">Save</button>
-      <a class="button border-0 ml-3 p-2" [routerLink]="['../']">Cancel</a>
+      <a class="button border-0 sm:ml-3 p-2 dark:text-white" [routerLink]="['../']">Cancel</a>
     </div>
     <div *ngIf="exists">
       <ng-template [ngIf]="toggled">
-        <p class="inline-block mr-2">Delete item?</p>
+        <p class="block sm:inline-block mr-2 mt-3 sm:mt-0">Delete item?</p>
         <button
-          class="mr-2 border-red-600 text-red-600 hover:bg-red-800"
+          class="mt-2 sm:mt-0 sm:mr-2 border-red-600 text-red-600 hover:bg-red-800"
           type="button"
           (click)="removeWorkout()">
           Yes
         </button>
-        <button type="button" class="mr-2 border-0" (click)="toggle()">No</button>
+        <button #no type="button" class="mr-2 border-0" (click)="toggle()">No</button>
       </ng-template>
       <ng-template [ngIf]="!toggled">
-        <button class="border-0 text-red-500 hover:bg-red-500 hover:shadow-md" (click)="toggle()">
+        <button
+          #delete
+          class="border-0 text-red-500 hover:bg-red-500 hover:shadow-md mt-3 sm:mt-0"
+          type="button"
+          (click)="toggle()">
           Delete
         </button>
       </ng-template>

@@ -1,7 +1,5 @@
-<div class="container">
-  <div
-    *ngIf="section"
-    class="flex justify-between items-center p-5 bg-slate-100 border-b border-indigo-300">
+<div class="container dark:bg-black">
+  <div *ngIf="section" class="section">
     <img
       class="w-10 h-10"
       src="assets/images/{{ section.type === 'workouts' ? 'workout' : 'meal' }}.svg"
@@ -15,7 +13,7 @@
     </a>
   </div>
 
-  <div class="m-7 border min-h-[100px]" *ngIf="list">
+  <div class="m-7 border min-h-[100px] dark:text-white dark:bg-slate-900" *ngIf="list">
     <span *ngIf="!list.length" class="flex justify-center items-center">
       <img class="w-5 h-5 mr-1" src="assets/images/face.svg" alt="sad face" />
       Nothing here to assign
@@ -31,8 +29,10 @@
     </div>
   </div>
 
-  <div class="p-5 border-t border-indigo-300">
+  <div class="p-5 border-t border-indigo-300 dark:bg-black">
     <button type="button" (click)="updateAssign()">Update</button>
-    <button class="border-0 ml-1" type="button" (click)="cancelAssign()">Cancel</button>
+    <button class="border-0 ml-1 dark:text-white" type="button" (click)="cancelAssign()">
+      Cancel
+    </button>
   </div>
 </div>

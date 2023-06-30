@@ -1,12 +1,12 @@
 <div class="drop-shadow-lg shadow-black">
-  <div class="relative flex items-center p-4 w-full border border-indigo-300">
+  <div class="relative flex flex-col sm:flex-row items-center p-4 w-full border border-indigo-300">
     <div class="flex items-center">
       <img src="assets/images/workout.svg" class="w-12 h-12 p-1" alt="workout" />
       <h1 class="text-lg font-bold dark:text-white">Your workout</h1>
     </div>
     <a
       [routerLink]="['../workouts/new']"
-      class="button flex items-center ml-auto py-2 px-4 uppercase text-sm">
+      class="button flex sm:flex-row items-center sm:ml-auto py-2 px-4 uppercase text-sm">
       <img class="w-4 h-4 mr-2" src="assets/images/add.svg" alt="add icon" />
       <span>New Workout</span>
     </a>
@@ -16,7 +16,7 @@
     *ngIf="workouts$ | async as workouts; else loading">
     <div
       *ngIf="!workouts.length"
-      class="flex justify-center items-center text-lg min-h-[100px] dark:text-white">
+      class="flex justify-center items-center text-lg min-h-[100px] p-5 dark:text-white">
       <img class="w-7 h-7 mr-2" src="assets/images/face.svg" alt="sad face" />
       No workouts, add a new workout
     </div>
@@ -29,7 +29,6 @@
   <ng-template #loading>
     <div
       class="flex justify-center items-center bg-white dark:bg-black dark:text-white border-indigo-300 border-x border-b p-5">
-      <!-- <img src="assets/loading.svg" alt="Fetching workouts" /> -->
       Fetching workouts...
     </div>
   </ng-template>

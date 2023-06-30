@@ -39,6 +39,7 @@ export class ScheduleAssignComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.section) this.selected = [...this.section.assigned];
+    document.body.style.overflow = 'hidden';
   }
 
   toggleItem(name: string): void {
@@ -56,7 +57,9 @@ export class ScheduleAssignComponent implements OnInit {
 
   updateAssign(): void {
     if (this.section) {
-      asyncScheduler.schedule(() => this.section?.triggeredElement.focus());
+      this.section.triggeredElement.focus();
+      document.body.style.overflow = '';
+
       this.update.emit({
         [this.section.type]: this.selected,
       });
@@ -64,7 +67,8 @@ export class ScheduleAssignComponent implements OnInit {
   }
 
   cancelAssign(): void {
-    this.cancel.emit();
     this.section?.triggeredElement.focus();
+    document.body.style.overflow = '';
+    this.cancel.emit();
   }
 }

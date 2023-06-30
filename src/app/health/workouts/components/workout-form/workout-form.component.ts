@@ -32,17 +32,17 @@ export class WorkoutFormComponent implements OnChanges {
     name: ['', Validators.required],
     type: 'strength',
     strength: this.formBuilder.group({
-      reps: 0,
-      sets: 0,
-      weight: 0,
+      reps: [0, Validators.min(0)],
+      sets: [0, Validators.min(0)],
+      weight: [0, Validators.min(0)],
     }),
     endurance: this.formBuilder.group({
-      distance: 0,
-      duration: 0,
+      distance: [0, Validators.min(0)],
+      duration: [0, Validators.min(0)],
     }),
   });
 
-  get required() {
+  get required(): boolean {
     return this.form.get('name')!.hasError('required') && this.form.get('name')!.touched;
   }
 
@@ -76,25 +76,6 @@ export class WorkoutFormComponent implements OnChanges {
   removeWorkout() {
     this.remove.emit(this.workout);
   }
-
-  // addIngredient(): void {
-  //   const elem = this.findEmptyFoodInput();
-  //   if (!elem) {
-  //     this.ingredients.push(new FormControl(''));
-  //     this.setFocusOnInput();
-  //   } else {
-  //     this.setFocusOnInput(elem);
-  //   }
-  // }
-
-  // removeIngredient(index: number): void {
-  //   if (this.ingredients.controls.length > 1) {
-  //     this.ingredients.removeAt(index);
-  //     this.setFocusOnInput();
-  //   } else {
-  //     this.ingredients.controls[0].patchValue('');
-  //   }
-  // }
 
   toggle() {
     this.toggled = !this.toggled;
