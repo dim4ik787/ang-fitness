@@ -70,7 +70,7 @@
 
   <div class="p-5 flex flex-col sm:flex-row justify-between">
     <div>
-      <button *ngIf="!exists" type="button" (click)="createWorkout()">Create meal</button>
+      <button *ngIf="!exists" type="button" (click)="createWorkout()">Create workout</button>
       <button *ngIf="exists" type="button" (click)="updateWorkout()">Save</button>
       <a class="button border-0 sm:ml-3 p-2 dark:text-white" [routerLink]="['../']">Cancel</a>
     </div>

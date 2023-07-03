@@ -22,7 +22,7 @@ export interface Workout {
   $exists?: () => boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WorkoutsService {
   workouts$ = this.authService.user.pipe(
     switchMap(user => this.angularFireDatabase.list(`workouts/${user?.uid}`).snapshotChanges()),

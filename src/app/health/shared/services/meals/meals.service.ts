@@ -13,7 +13,7 @@ export interface Meal {
   $exists?: () => boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MealsService {
   meals$ = this.authService.user.pipe(
     switchMap(user => this.angularFireDatabase.list(`meals/${user?.uid}`).snapshotChanges()),

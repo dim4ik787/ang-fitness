@@ -20,9 +20,11 @@ export class ScheduleSectionComponent {
 
   @Output() selected = new EventEmitter<SelectedSection>();
 
-  onSelect(event: Event, type: string, assigned: Array<string> = []): void {
+  onSelect(event: Event, type: string, assigned?: Array<string> | null): void {
     const data = this.section;
     const triggeredElement = event.target as HTMLElement;
+
+    assigned = assigned ?? [];
 
     this.selected.emit({
       type,

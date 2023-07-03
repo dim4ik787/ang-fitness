@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HealthRoutingModule } from './health-routing.module';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  imports: [HealthRoutingModule, SharedModule.forRoot()],
+  imports: [HealthRoutingModule],
   exports: [],
   declarations: [],
   providers: [],

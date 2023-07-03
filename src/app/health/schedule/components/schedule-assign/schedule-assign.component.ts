@@ -7,7 +7,6 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { asyncScheduler } from 'rxjs';
 import { Meal } from 'src/app/health/shared/services/meals/meals.service';
 import { ISelectedData } from 'src/app/health/shared/services/schedule/schedule.service';
 import { Workout } from 'src/app/health/shared/services/workouts/workouts.service';

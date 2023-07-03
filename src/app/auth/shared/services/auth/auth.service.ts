@@ -9,7 +9,7 @@ export interface User {
   authenticated: boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   auth$ = this.angularFireAuth.authState.pipe(
     tap(next => {

@@ -21,7 +21,7 @@ export interface ScheduleList {
   [key: string]: unknown;
 }
 
-export interface ISelectedData extends SelectedSection {
+export interface ISelectedData {
   type: string;
   assigned: Array<string>;
   section: string;
@@ -30,7 +30,7 @@ export interface ISelectedData extends SelectedSection {
   data: ScheduleItem;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ScheduleService {
   private date$ = new BehaviorSubject(new Date());
   private section$ = new Subject<ISelectedData>();

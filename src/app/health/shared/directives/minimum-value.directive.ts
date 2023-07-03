@@ -4,18 +4,18 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
   selector: '[appMinimumValue]',
 })
 export class MinimumValueDirective {
-  private _appMinimumValue: number | undefined;
+  private _appMinimumValue: number | null = null;
 
   @HostBinding('style.border') border: string | undefined;
 
   @Input()
-  set appMinimumValue(value: string | number | undefined) {
+  set appMinimumValue(value: string | number | null) {
     if (typeof value === 'string') value = +value;
     if (typeof value === 'number' && !isNaN(value) && isFinite(value))
       this._appMinimumValue = value;
   }
 
-  get appMinimumValue(): number | undefined {
+  get appMinimumValue(): number | null {
     return this._appMinimumValue;
   }
 

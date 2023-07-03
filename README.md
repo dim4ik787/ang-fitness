@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
+Here I tried tailwind in conjunction with angular.
+Result:
+You can refuse to use the preprocessor, because tailwind has everything out of the box and reduce the build time of the project
+Cons: The html becomes quite large and hard to read. However, you can move lines that are too long to a separate file.
+Also some tailwind selectors don't work on angular host elements.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -25,6 +31,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-
-

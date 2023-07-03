@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FirebaseOptions } from '@angular/fire/app/firebase';
-
-import { SharedModule } from './shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 
 const firebaseConfig: FirebaseOptions = {
@@ -25,7 +22,6 @@ const firebaseConfig: FirebaseOptions = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    SharedModule.forRoot(),
     AuthRoutingModule,
   ],
   declarations: [],
